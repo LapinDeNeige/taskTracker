@@ -1,0 +1,255 @@
+main > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    height: 60px;
+	margin-top:20px;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    content: '';
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 2px 4px;
+    background: transparent;
+}
+
+a.asc:after {
+    border-bottom: solid 7px #212529;
+    border-top-width: 0;
+}
+
+a.desc:after {
+    border-top: solid 7px #212529;
+    border-bottom-width: 0;
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+.window
+{
+	background-color:rgb(59,63,70);
+}
+
+.nav
+{
+	padding-top:10px;
+	padding-left:5%;
+	display:inline-block;
+	text-decoration:none;	
+}
+
+.alert
+{
+	border-radius:0px;
+	max-width:250px;
+	color:white;
+	border:none;
+	padding-left:12px;
+	font-size:15px;
+	font-weight:200;
+	letter-spacing:0.7px;
+	position:relative;
+	/*top:-129px;*/
+	left:35%;
+}
+.alert-success
+{
+	margin-top:-173px;
+	background-color:green;
+}
+.alert-danger
+{
+	margin-top:-130px;
+	background-color:#58151c;
+}
+.tbl
+{
+	background-color:inherit;/*#3b3f46;*/
+	color:white;
+	
+	margin-bottom:30px;
+
+	border-radius:12px;
+	margin-top:10px;
+	
+	min-width:250px;
+	min-height:100px;
+	overflow:auto;
+	
+	position:absolute;
+	left:15%;
+	display:table-row;
+	width:80%;
+	height:70%;
+}
+
+tr
+{
+	background-color:inherit;
+	display:block;
+	margin-top:15px;
+	margin-top:26px;
+	margin-bottom:26px;
+	max-height:250px;
+	max-width:1200px;
+}
+tbody
+{
+	background-color:inherit;
+	left:30px;
+	margin-top:10px;
+}
+td
+{
+	padding-top:15px;
+	padding-left:69px;
+	padding-right:69px;
+	padding-bottom:23px;
+	margin-top:10px;
+	background-color:#272C33;
+	font-size:19px;
+	font-weight:3px;
+	font-family:'Arial';
+	max-width:570px;
+	width:20%;
+}
+td:hover
+{
+	cursor:pointer;
+}
+thead
+{
+	display:inline;
+	position:fixed;
+	left:15%;
+	top:65px;
+	width:85%;
+}
+th,.empty
+{
+	font-size:20px;
+
+	padding-left:80px;
+	padding-top:10px;
+
+	/*padding:17%;*/
+	font-weight:normal;
+	color:gray;
+}
+.tbl-header table thead
+{
+	background-color:red;
+}
+
+h1
+{
+	color:white;
+	font-size:25px;
+}
+.form-control
+{
+	border-radius:0px;
+}
+.form-control:valid
+{
+	background:inherit;
+	background-color:white;
+}
+.modal-body
+{
+	margin-left:20%;
+}
+
+.modal-dialog
+{
+	min-width:350px;
+}
+.modal-content
+{
+	background-color:#37424d;/*#3b4045;*/
+	border-radius:0px;
+}
+.form-label
+{
+	color:white;
+}
+.empty
+{
+	color:white;
+	margin-top:10px;
+	padding-top:10px;
+	padding-left:40%;
+	width:1112px;
+}
+.invalid-feedback
+{
+	color:red;
+}
+/*
+.container
+{
+	margin-left:35%;
+}
+*/
