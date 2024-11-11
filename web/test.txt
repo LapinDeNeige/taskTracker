@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS tasks_data_25(Task VARCHAR(50),taskNumber INT(5) PRIMARY KEY AUTO_INCREMENT,
+		taskStatus VARCHAR(20),Task_start_date date VARCHAR(25),Task_end_date VARCHAR(25),taskInfo VARCHAR(250));

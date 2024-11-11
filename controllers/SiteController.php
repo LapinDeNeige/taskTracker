@@ -66,7 +66,11 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    {	
+    {
+		$isLoggedIn=false;
+		if(!Yii::$app->user->isGuest)
+			$isLoggedIn=true;
+		
 		$loginForm=new LoginForm();
 		$signupForm=new SignupForm();
 		$taskForm=new TaskForm();
@@ -75,13 +79,13 @@ class SiteController extends Controller
 		
 		$queryCount=$query->count();
 		
-		$pages=new Pagination(['totalCount'=>$queryCount,
-		'defaultPageSize'=>5,]);
+		$pages=new Pagination(['totalCount'=>$queryCount
+		,'defaultPageSize'=>1]); 
 		
-		$data=$query->offset($pages->offset)->limit(3)->all(); //$pagination->limit
+		$data=$query->offset($pages->offset)->limit(3)->all(); 
 		
 		//'sort'=>false
-		return $this->render('index',['loginModel'=>$loginForm,'signupModel'=>$signupForm,'newTaskModel'=>$taskForm,'data'=>$data,'pages'=>$pages]);   
+		return $this->render('index',['loginModel'=>$loginForm,'signupModel'=>$signupForm,'newTaskModel'=>$taskForm,'data'=>$data,'isLoggedIn'=>$isLoggedIn,'pages'=>$pages]);   
 		
     }
 
@@ -103,16 +107,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) 
 		{ 
 			if(!$model->login())
-			{
 				Yii::$app->session->setFlash('error','Incorrect login or password');
 				
-			}
 			else
-			{
-				Yii::$app->session->setFlash('success','You loged in');
-			}
-			
-            
+				Yii::$app->session->setFlash('success','You logged in');
         }
 			
 		return $this->redirect('index');
@@ -122,15 +120,17 @@ class SiteController extends Controller
 	{
 		$signupForm=new SignupForm();
 		if($signupForm->load(Yii::$app->request->post()))
-		{
-			
+		{	
 			if($signupForm->validateUsername())
 			{
 				if(!$signupForm->validatePassword())
 					Yii::$app->session->setFlash('error','Password is too weak. It must contain at least 7 characters');
 					
 				else if($signupForm->signup())
+				{
 					Yii::$app->session->setFlash('success','Your account has been created');
+					$signupForm->addNewUserTable();
+				}
 					
 				else
 					Yii::$app->session->setFlash('error','Signup failed');
@@ -166,7 +166,9 @@ class SiteController extends Controller
 			$tasksData=new TasksData();
 			$tasksData->Task=$taskForm->task;
 			
-			//$tasksData->Task_start_date=$taskForm->taskStart;
+			$tasksData->Task_start_date=$taskForm->taskStart;
+			$tasksData->Task_end_date=$taskForm->taskEnd;
+			
 			$tasksData->taskInfo=$taskForm->taskInformation;
 			
 			$tasksData->save();

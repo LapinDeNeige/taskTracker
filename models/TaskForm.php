@@ -26,17 +26,23 @@ class TaskForm extends Model
 			//['status','default','value'=>1],
 		];
 	}
+	/*
 	public function addNewUserTable()
 	{
 		$tableName=Signup::find()->asArray()->orderBy(['id'=> SORT_DESC])->limit(1)->one();
 		$tableName='tasks_data_'.$tableName['id'];
 			
-		$sqlCommand='CREATE TABLE IF NOT EXISTS '.$tableName.'(Id INT(3) PRIMARY KEY AUTO_INCREMENT, Task VARCHAR(50),
-		taskStatus VARCHAR(20),Task_start_date date,Task_end_date date,taskInfo VARCHAR(50));';
+		$sqlCommand='CREATE TABLE IF NOT EXISTS '.$tableName.'(Task VARCHAR(50),taskNumber INT(5) PRIMARY KEY AUTO_INCREMENT,
+		taskStatus VARCHAR(20),Task_start_date date VARCHAR(25),Task_end_date VARCHAR(25),taskInfo VARCHAR(250));';
 		
-		//file_put_contents('test.txt',$sqlCommand);
-		$sqlResult=Yii::$app->db->createCommand($sqlCommand);
-		$sqlResult->execute();
+		file_put_contents('test.txt',$sqlCommand);
+		//$sqlResult=Yii::$app->db->createCommand($sqlCommand);
+		//$sqlResult->execute();
+		
+	}
+	*/
+	public function checkDates()
+	{
 		
 	}
 }

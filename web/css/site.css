@@ -113,6 +113,8 @@ a.desc:after {
 	position:relative;
 	/*top:-129px;*/
 	left:35%;
+	/**/
+	transition:0.5 all ease-in-out;
 }
 .alert-success
 {
@@ -123,6 +125,12 @@ a.desc:after {
 {
 	margin-top:-130px;
 	background-color:#58151c;
+	animation:fadein 2s;
+	-webkit-animation:fadein 2s;
+}
+@keyframes fadein
+{
+	from
 }
 .tbl
 {
@@ -150,10 +158,11 @@ tr
 	background-color:inherit;
 	display:block;
 	margin-top:15px;
-	margin-top:26px;
 	margin-bottom:26px;
 	max-height:250px;
 	max-width:1200px;
+	position:relative;
+	top:80px;
 }
 tbody
 {
@@ -172,8 +181,9 @@ td
 	font-size:19px;
 	font-weight:3px;
 	font-family:'Arial';
-	max-width:570px;
+	max-width:323px;
 	width:20%;
+	
 }
 td:hover
 {
@@ -208,9 +218,28 @@ h1
 	color:white;
 	font-size:25px;
 }
+select
+{
+	background-color:inherit;
+	color:white;
+	font-family:inherit;
+	border:inherit;
+}
+option
+{
+	background-color:#272C33;
+}
+a
+{
+	text-decoration:none;
+	color:white;
+}
+
 .form-control
 {
 	border-radius:0px;
+	font-family:'Arial';
+	font-size:17px;
 }
 .form-control:valid
 {
@@ -247,6 +276,7 @@ h1
 {
 	color:red;
 }
+
 /*
 .container
 {

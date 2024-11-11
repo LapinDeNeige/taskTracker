@@ -52,17 +52,21 @@ h1,.txt-bg
 }
 .btn-dialog
 {
-	background-color:blue;
+	background-color:inherit;
 	border-radius:6px;
 	padding:6px;
 	margin-top:5%;
 	color:white;
-	border:none;
+	border:2px solid white;
 }
 
 .site-error-container
 {
 	margin-left:30%;
+}
+.table-img-container
+{
+	display:flex;
 }
 .add-button
 {
@@ -95,6 +99,7 @@ ul
 {
 	color:white;
 }
+
 .active
 {
 	color:white;
@@ -103,6 +108,13 @@ ul
 {
 	margin-left:15%;
 	margin-top:-32px;
+}
+.pagination
+{
+	font-size:22px;
+	color:white;
+	display:flex;
+	margin-top:95px;
 }
 
 @media(width< 500px)

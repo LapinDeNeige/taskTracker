@@ -12,7 +12,7 @@ class m241021_113912_auth extends Migration
      */
     public function safeUp()
     {
-
+		
     }
 
     /**
