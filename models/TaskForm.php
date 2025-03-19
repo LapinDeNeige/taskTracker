@@ -14,8 +14,8 @@ class TaskForm extends Model
 	public $taskStart;
 	public $taskEnd;
 	public $taskInformation;
-	
 	public $status;
+
 	public function rules()
 	{
 		return [
@@ -26,24 +26,25 @@ class TaskForm extends Model
 			//['status','default','value'=>1],
 		];
 	}
-	/*
-	public function addNewUserTable()
+
+	public  function addData($userId)
 	{
-		$tableName=Signup::find()->asArray()->orderBy(['id'=> SORT_DESC])->limit(1)->one();
-		$tableName='tasks_data_'.$tableName['id'];
+		$tasksData=new TasksData();
+		$tasksData->Task=$this->task;
+		
+		$lastTaskId=TasksData::getLastTaskNumber($userId);
+
+		$tasksData->taskNumber = ($lastTaskId+1); 
+
+		$tasksData->Task_start_date=$this->taskStart;
+		$tasksData->Task_end_date=$this->taskEnd;
 			
-		$sqlCommand='CREATE TABLE IF NOT EXISTS '.$tableName.'(Task VARCHAR(50),taskNumber INT(5) PRIMARY KEY AUTO_INCREMENT,
-		taskStatus VARCHAR(20),Task_start_date date VARCHAR(25),Task_end_date VARCHAR(25),taskInfo VARCHAR(250));';
+		$tasksData->taskInfo=$this->taskInformation;
+
+		$tasksData->user_id=$userId;
 		
-		file_put_contents('test.txt',$sqlCommand);
-		//$sqlResult=Yii::$app->db->createCommand($sqlCommand);
-		//$sqlResult->execute();
-		
-	}
-	*/
-	public function checkDates()
-	{
-		
+		$tasksData->save();
+
 	}
 }
 

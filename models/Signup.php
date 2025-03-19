@@ -32,7 +32,10 @@ class Signup extends ActiveRecord implements IdentityInterface
 	{
 		return $this->getPrimaryKey();
 	}
-	
+	public function getPassword()
+    {
+        return $this->password;
+    }
 	public static function findIdentity($id)
 	{
 		return static::findOne(['id'=>$id]);
@@ -46,23 +49,29 @@ class Signup extends ActiveRecord implements IdentityInterface
 		return $this->auth_key;
 	}
 	
+	public function getRole()
+	{
+		return $this->role;
+	}
+
 	public function beforeSave($insert)
 	{
 		if(parent::beforeSave($insert))
 		{
 			if($this->isNewRecord)
 				$this->auth_key=Yii::$app->security->generateRandomString();
+
 			return true;
 		}
 		return false;
 	}
 	
-	/*
+	
 	public static function getLastUserId()
 	{
-		return static::find()->orderBy(['id'=>SORT_DESC])->one();
+		return static::find()->orderBy(['id'])->one();
 	}
-	*/
+	
 	
 }
 

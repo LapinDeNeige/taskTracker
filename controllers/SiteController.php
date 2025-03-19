@@ -13,6 +13,13 @@ use app\models\TasksData;
 use app\models\SignupForm;
 use app\models\TaskForm;
 
+use app\models\Signup;
+use app\models\EditModel;
+
+///
+use app\models\DeleteBtnForm;
+///
+
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
@@ -71,22 +78,33 @@ class SiteController extends Controller
 		if(!Yii::$app->user->isGuest)
 			$isLoggedIn=true;
 		
-		$loginForm=new LoginForm();
-		$signupForm=new SignupForm();
-		$taskForm=new TaskForm();
-		
-		$query=TasksData::find()->where('1');
+
+        /**Find in databasase by userid  */
+        //$userId=Yii::$app->user->identity->id;
+
+        $delBtnForm=new DeleteBtnForm();
+        $editModel=new EditModel();
+
+
+		$query=TasksData::find()->where([]);//['user_id'=>$userId]
 		
 		$queryCount=$query->count();
 		
 		$pages=new Pagination(['totalCount'=>$queryCount
 		,'defaultPageSize'=>1]); 
 		
+       
+
 		$data=$query->offset($pages->offset)->limit(3)->all(); 
+
+		/**For main.php layout */
+        $this->view->params['loginModel']=new LoginForm(); 
+        $this->view->params['signupModel']=new SignupForm();
+        $this->view->params['taskModel']=new TaskForm();
+        /** */
+
 		
-		//'sort'=>false
-		return $this->render('index',['loginModel'=>$loginForm,'signupModel'=>$signupForm,'newTaskModel'=>$taskForm,'data'=>$data,'isLoggedIn'=>$isLoggedIn,'pages'=>$pages]);   
-		
+		return $this->render('index',['delBtnFrm'=>$delBtnForm,'editModel'=>$editModel,'data'=>$data,'dataCount'=>$queryCount,'isLoggedIn'=>$isLoggedIn,'pages'=>$pages]);   
     }
 
     /**
@@ -108,14 +126,15 @@ class SiteController extends Controller
 		{ 
 			if(!$model->login())
 				Yii::$app->session->setFlash('error','Incorrect login or password');
-				
 			else
 				Yii::$app->session->setFlash('success','You logged in');
         }
 			
-		return $this->redirect('index');
+		return $this->goHome();
 		
     }
+
+
 	public function actionSignup()
 	{
 		$signupForm=new SignupForm();
@@ -123,24 +142,28 @@ class SiteController extends Controller
 		{	
 			if($signupForm->validateUsername())
 			{
-				if(!$signupForm->validatePassword())
-					Yii::$app->session->setFlash('error','Password is too weak. It must contain at least 7 characters');
+				if($signupForm->validatePassword())
+                {
+                    if($signupForm->signup())
+    				{
+	    				Yii::$app->session->setFlash('success','Your account has been created');
+                    	//$signupForm->addNewUserTable();
+		    		}
 					
-				else if($signupForm->signup())
-				{
-					Yii::$app->session->setFlash('success','Your account has been created');
-					$signupForm->addNewUserTable();
-				}
-					
-				else
-					Yii::$app->session->setFlash('error','Signup failed');
-						
+			    	else
+				    	Yii::$app->session->setFlash('error','You password is too weak.');
+                }	
+                else 
+                    Yii::$app->session->setFlash('error','Signup failed');
+                						
 			}
+
 			else
 				Yii::$app->session->setFlash('error','This account already exists');
 			
 		}
-		$this->redirect('index');
+
+		return $this->goHome();
 	}
     /**
      * Logout action.
@@ -159,33 +182,95 @@ class SiteController extends Controller
 		if(Yii::$app->user->isGuest)
 			$this->redirect('index');
 		
-		$taskForm=new TaskForm();
+		$addForm=new TaskForm();
 		
-		if($taskForm->load(Yii::$app->request->post()))
+		if($addForm->load(Yii::$app->request->post()))
 		{
-			$tasksData=new TasksData();
-			$tasksData->Task=$taskForm->task;
-			
-			$tasksData->Task_start_date=$taskForm->taskStart;
-			$tasksData->Task_end_date=$taskForm->taskEnd;
-			
-			$tasksData->taskInfo=$taskForm->taskInformation;
-			
-			$tasksData->save();
-			
-			Yii::$app->session->setFlash('success','Data loaded');
+            $userId=Yii::$app->user->identity->id;
+            $addForm->addData($userId); 
+
+            Yii::$app->session->setFlash('success','Data loaded');
 		}
 		else
 			Yii::$app->session->setFlash('error','Data not loaded');
+
 		return $this->goHome();
 	}
 	
-	public function actionTmp()
+    /** 
+    * Remove task action 
+     */
+
+    public function actionRemove()
+    {
+        if(Yii::$app->user->isGuest)
+			$this->redirect('index');
+
+        $delBtnForm=new DeleteBtnForm();
+
+        if($delBtnForm->load(Yii::$app->request->post()))
+        {
+            $delBtnForm->deleteData();
+            Yii::$app->session->setFlash('success','Data removed sucessfully.'); 
+        }
+        else
+        {
+            Yii::$app->session->setFlash('error','Error removing data');
+        }
+
+        return $this->goHome();
+    }
+
+    public function actionEdit()
+    {
+        if(Yii::$app->user->isGuest)
+            $this->redirect('index');
+
+        $editModel=new EditModel();
+        if($editModel->load(Yii::$app->request->post()))
+        {            
+            if(!$editModel->validate())
+                Yii::$app->session->setFlash('error','Task not set');
+            else
+            {
+                $editModel->editData();
+                Yii::$app->session->setFlash('success','Changed sucessfully');
+            }
+        }
+        else
+        {
+            Yii::$app->session->setFlash('error','Error editing');
+        }
+
+        return $this->goHome();
+    }
+
+    ///
+    public function actionTmp()
 	{
-		$t=new TaskForm();
-		$t->addNewUserTable();
-		
+        
+        if(Yii::$app->request->isAjax)
+        {
+            $taskId=Yii::$app->request->post('task_id'); //$_POST['data'];
+            $taskStatus=Yii::$app->request->post('task_status'); //$_POST['data'];
+
+            if(!isset($taskId)||!isset($taskStatus))
+                Yii::$app->session->setFlash('error','Task id does not exist '.$data);    
+            else
+            {
+                
+                $taskData=TasksData::findOne($taskId);
+                $taskData->taskStatus=$taskStatus;
+                
+                $taskData->save();
+                
+
+                Yii::$app->session->setFlash('success','Data successfull ');
+            }
+        }
 		return  $this->goHome();
 		
 	}
+    ///
 }
+

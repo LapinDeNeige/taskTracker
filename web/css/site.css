@@ -3,10 +3,11 @@ main > .container {
 }
 
 .footer {
-    background-color: #f5f5f5;
+    background-color:#272C33;;
     font-size: .9em;
     height: 60px;
-	margin-top:20px;
+	/*margin-top:20px;*/
+	margin-bottom:-10%;
 }
 
 .footer > .container {
@@ -110,20 +111,20 @@ a.desc:after {
 	font-size:15px;
 	font-weight:200;
 	letter-spacing:0.7px;
-	position:relative;
-	/*top:-129px;*/
-	left:35%;
+	position:absolute;
+	top:-3px;
+	left:45%;
 	/**/
-	transition:0.5 all ease-in-out;
+	/*transition:0.5 all ease-in-out;*/
 }
 .alert-success
 {
-	margin-top:-173px;
+	/*margin-top:-173px;*/
 	background-color:green;
 }
 .alert-danger
 {
-	margin-top:-130px;
+	/*margin-top:-130px;*/
 	background-color:#58151c;
 	animation:fadein 2s;
 	-webkit-animation:fadein 2s;
@@ -136,18 +137,15 @@ a.desc:after {
 {
 	background-color:inherit;/*#3b3f46;*/
 	color:white;
-	
-	margin-bottom:30px;
-
 	border-radius:12px;
-	margin-top:10px;
-	
 	min-width:250px;
 	min-height:100px;
 	overflow:auto;
 	
 	position:absolute;
-	left:15%;
+	left:10%;
+	top:140px;
+	bottom:130px;
 	display:table-row;
 	width:80%;
 	height:70%;
@@ -157,13 +155,15 @@ tr
 {
 	background-color:inherit;
 	display:block;
-	margin-top:15px;
+	/*margin-top:15px;*/
 	margin-bottom:26px;
-	max-height:250px;
-	max-width:1200px;
+	max-height:1200px;
+	max-width:auto;
+
 	position:relative;
 	top:80px;
 }
+
 tbody
 {
 	background-color:inherit;
@@ -176,32 +176,57 @@ td
 	padding-left:69px;
 	padding-right:69px;
 	padding-bottom:23px;
-	margin-top:10px;
+	/*margin-top:10px;*/
 	background-color:#272C33;
 	font-size:19px;
 	font-weight:3px;
 	font-family:'Arial';
-	max-width:323px;
-	width:20%;
+	/*max-width:323px;*/
+	/*width:20%;*/
 	
 }
 td:hover
 {
 	cursor:pointer;
 }
+.td-task-number
+{
+	width:5%;
+}
+.td-task
+{
+	width:15%;
+}
+.td-task-start
+{
+	width:10%;
+}
+.td-task-end
+{
+	width: 10%;
+}
+.td-task-info
+{
+	width:55%;
+}
+.td-task-status
+{
+	width:5%;
+}
+
 thead
 {
 	display:inline;
-	position:fixed;
-	left:15%;
-	top:65px;
+	position:relative;
+	left:1%;
+	top:2px;
 	width:85%;
 }
 th,.empty
 {
 	font-size:20px;
 
-	padding-left:80px;
+	padding-left:105px;
 	padding-top:10px;
 
 	/*padding:17%;*/
@@ -228,6 +253,7 @@ select
 option
 {
 	background-color:#272C33;
+	color:white;
 }
 a
 {
@@ -237,7 +263,7 @@ a
 
 .form-control
 {
-	border-radius:0px;
+	border-radius:9px;
 	font-family:'Arial';
 	font-size:17px;
 }
@@ -254,6 +280,7 @@ a
 .modal-dialog
 {
 	min-width:350px;
+	/*border-radius: 10px;*/
 }
 .modal-content
 {
@@ -277,6 +304,59 @@ a
 	color:red;
 }
 
+@media(width < 900px) and (orientation:landscape)
+{
+	thead
+	{
+		display: none;
+	}
+}
+@media(width < 700px)and (orientation: portrait) /*MOBILE VIEW*/
+{
+
+	.tbl
+	{
+		max-width:110%;
+		min-width: 110%;
+		overflow-x: hidden;
+		top:20px;
+	}
+	td
+	{
+		display: flex;
+
+		min-width: 99%;
+		max-width: 99%;
+		
+		/*width:95%;*/
+		margin-top: 15px;
+
+		margin-left:72%;
+		border-radius: 10px ;
+		margin-left:-3%;
+		font-size:150%;
+		padding-left:30%;
+	}
+	thead
+	{
+		display: none;
+	}
+	
+	
+	
+}
+@media(width < 450px)
+{
+	.add-log-container
+	{
+		display: none;
+	}
+	.fonts-size-header
+	{
+		position: relative;
+		left:25%;
+	}
+}
 /*
 .container
 {

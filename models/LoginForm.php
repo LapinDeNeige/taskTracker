@@ -64,7 +64,7 @@ class LoginForm extends Model
 
 		if($resultAuth)
 		{		
-			if($resultAuth->validatePassword($this->password))
+          	if($resultAuth->validatePassword($this->password))
 			{
 				Yii::$app->session->set('Username',$resultAuth->username);
 				return Yii::$app->user->login($this->getUser()); 
@@ -90,6 +90,16 @@ class LoginForm extends Model
 
         return $this->_user;
     }
-	
+	public function getRole($id)
+	{
+		$role=Signup::findOne(['id'=>$id]);
+		return $role->role;
+	}
 
+    /*
+    public function getUserTable()
+    {
+
+    }
+    */
 }
