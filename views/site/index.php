@@ -81,7 +81,7 @@
 
 			echo '<div style="display:inline-flex">';
 				echo Html::submitButton('Ok',['class'=>'btn-in-confirm']);
-				//echo Html::tag('button','Cancel',['class'=>'btn-in-confirm','onclick'=>'closeDeleteTaskModal()']);
+				echo Html::tag('button','Cancel',['class'=>'btn-in-confirm','onclick'=>'closeDeleteTaskModal()']);
 			echo '</div>';
 		ActiveForm::end();
 	Modal::end();
@@ -117,7 +117,7 @@
 		///
 		global $curTaskNumber;
 		///
-
+		
 		if(!$isLoggedIn)
 		{
 			echo Html::tag('h1','Task tracker',['class'=>'h-logo']);
@@ -134,7 +134,7 @@
 
 			]);
 
-			/**LATER TO CLASS */
+			//LATER TO CLASS 
 			
 			echo '<div style="width:50%;height:auto;min-height:150px;max-width:950px;;background-color:#272C33;font-weight:10px2px;font-size:25px;margin-top:8%;margin-left:27%;">';
 				echo Html::tag("h1","Task tracker helps you in business to track your issues in your projects",['class'=>'fonts-color','style'=>'line-height:36px;padding:5%;']);
@@ -142,9 +142,10 @@
 				echo Html::tag("h1","Access your tasks wherever you are",['class'=>'fonts-color','style'=>'line-height:36px;padding:5%;']);
 				echo Html::tag("h1","Fully free! Discover new expierence!",['class'=>'fonts-color','style'=>'line-height:36px;padding:5%;']);
 			echo '</div>';
-			/** */
+			
 			
 		}
+
 		else
 		{
 			$columns=[

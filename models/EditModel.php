@@ -47,38 +47,32 @@ class EditModel extends Model
 	*/
         
     }
-	public function beforeValidate()
+	public function validateData()
 	{
-		if((empty($this->task) || !isset($this->task)) &&
-		(empty($this->taskStart) ||!isset($this->taskStart) ) &&
-		(empty($this->taskEnd) ||!isset($this->taskEnd) ) &&
-		(empty($this->taskInformation) ||!isset($this->taskInformation) ))
-		{
+		if(empty($this->task) && empty($this->taskStart) && empty($this->taskEnd) && empty($this->taskInformation))
 			return false;
-		}
 
 		return true;
 	}
+
 	public function editData()
 	{
 		$valEditId=$this->taskNumber;
-        $dataEdit=TasksData::findOne($valEditId);
+        $dataEdit=TasksData::find($valEditId)->one();
 
 		///
 		//$cnt=$dataEdit->count();
-		//file_put_contents('test.txt',$this->task);
+		//file_put_contents('test.txt',$valEditId);
 		///
-
+		
 		if(!empty($this->task))
 			$dataEdit->Task=$this->task;
 		if(!empty($this->taskStart))
 			$dataEdit->Task_start_date=$this->taskStart;
-
 		if(!empty($this->taskEnd))
 			$dataEdit->Task_end_date=$this->taskEnd;
 		if(!empty($this->taskInformation))
 			$dataEdit->taskInfo=$this->taskInformation;
-		
 		$dataEdit->save();
 	}
     

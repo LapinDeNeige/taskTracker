@@ -53,8 +53,8 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
 
     Modal::begin(['id'=>'modal-login','class'=>'bg-color txt-bg','title'=>'<h1 style="margin-left:30%;"> Login user </h1>']);
 		$loginForm=ActiveForm::begin(['method'=>'post','action'=>Url::toRoute(['login'])]);
-			echo $loginForm->field($loginModel,'username')->textInput(['maxlength'=>'50'])->label('Username or email');
-			echo $loginForm->field($loginModel,'password')->passwordInput(['maxlength'=>'50'])->label('Password');
+			echo $loginForm->field($loginModel,'username')->textInput(['maxlength'=>'50','placeholder'=>'Username'])->label('Username or email');
+			echo $loginForm->field($loginModel,'password')->passwordInput(['maxlength'=>'50','placeholder'=>'Password'])->label('Password');
 			echo Html::submitButton('Login',['class'=>'btn-dialog']);
 		ActiveForm::end();	
 	Modal::end();
@@ -75,11 +75,11 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
 	'title'=>'<h1 style="margin-left:30%;"> Add new task </h1>']);
 		//$dataDate=
 		$addTaskModel=ActiveForm::begin(['method'=>'post','action'=>Url::toRoute(['add'])]); 
-			echo $addTaskModel->field($newTaskModel,'task')->textInput(['maxlength'=>'50']);
+			echo $addTaskModel->field($newTaskModel,'task')->textInput(['maxlength'=>'50','placeholder'=>'Task name']);
 			//echo $addTaskModel->field($newTaskModel,'taskStart')->textInput(['']);//widget(\kartik\daterange\DateRangePicker::className(),['attribute'=>'datetime_range']);
-			echo $addTaskModel->field($newTaskModel,'taskStart')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control']]);
-			echo $addTaskModel->field($newTaskModel,'taskEnd')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control']]);
-			echo $addTaskModel->field($newTaskModel,'taskInformation')->textarea(['maxlength'=>'90','style'=>'height:150px;']);
+			echo $addTaskModel->field($newTaskModel,'taskStart')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control','placeholder'=>'Date start']]);
+			echo $addTaskModel->field($newTaskModel,'taskEnd')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control','placeholder'=>'Date end']]);
+			echo $addTaskModel->field($newTaskModel,'taskInformation')->textarea(['maxlength'=>'90','style'=>'height:150px;','placeholder'=>'Task information']);
 			echo Html::submitButton('Send',['class'=>'btn-dialog']);
 		ActiveForm::end();
 	Modal::end();
@@ -88,29 +88,30 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
 
     CustomNavBar::begin();
 	echo CustomNavBar ::widget(['header'=>'Task tracker','headerOptions'=>['fonts-color fonts-size-header nav']]);
+        
 		if(Yii::$app->user->isGuest)
 		{
 		    echo Html::tag('button','Login',['onclick'=>'openLoginModal()','class'=>'btn-nav fonts-size-nav btn-dialog login-btn']);
             echo Html::tag('button','Sign in',['onclick'=>'','class'=>'btn-nav fonts-size-nav btn-dialog signin-btn']);
 		}
+        
 		else
 		{
-		echo '<div class="add-log-container">';
-            $id=Yii::$app->user->id;
-            $newUser=new LoginForm();
-            $role=$newUser->getRole($id);
-            
-            if($role=='admin')
-                echo Html::tag('button','Sign in new user',['class'=>'btn-nav fonts-size-nav btn-dialog signin-btn-admin','onclick'=>'openSignupModal()']);
+            echo '<div class="add-log-container">';
+                $id=Yii::$app->user->id;
+                $newUser=new LoginForm();
 
-            $logoutForm=ActiveForm::begin(['method'=>'post','action'=>Url::toRoute('logout')]);
-                echo Html::submitButton('Logout',['class'=>'fonts-size-nav btn-nav btn-dialog logout-btn']);
-            ActiveForm::end();
-                        
-			//echo Html::tag('button','Add new task',['class'=>'fonts-size-nav btn-nav']);
-            echo Html::tag('button','',['class'=>'btn-nav btn-dark-mode']);
-            echo Html::tag('button','Add new task',['class'=>'fonts-size-nav btn-nav add-button','onclick'=>'openAddModal();']); //'style'=>'position:relative;top:-32px;left:75%;'    
-        echo '</div>';
+                $role=$newUser->getRole($id);
+                if($role=='admin')
+                    echo Html::tag('button','Sign in new user',['class'=>'btn-nav fonts-size-nav btn-dialog signin-btn-admin','onclick'=>'openSignupModal()']);
+
+                $logoutForm=ActiveForm::begin(['method'=>'post','action'=>Url::toRoute('logout')]);
+                    echo Html::submitButton('Logout',['class'=>'fonts-size-nav btn-nav btn-dialog logout-btn']);
+                ActiveForm::end();
+
+                echo Html::tag('button','',['class'=>'btn-nav btn-dark-mode']);
+                echo Html::tag('button','Add new task',['class'=>'fonts-size-nav btn-nav add-button','onclick'=>'openAddModal();']); //'style'=>'position:relative;top:-32px;left:75%;'    
+            echo '</div>';
 		}
     CustomNavBar::end();
 	

@@ -9,7 +9,7 @@
 	padding-left:12%;
 	padding-top:15px;
 	padding-bottom:15px;
-	border-radius:7px;
+	border-radius:10px;
 	max-width:650px;
 	width:auto;
 	margin-left:15%;
@@ -79,11 +79,12 @@ h1,.txt-bg
 .btn-delete
 {	
 	margin-left:-90px;
-	
+	background-color: red;
 }
 .btn-edit
 {
 	margin-left: -150px;
+	background-color:dodgerblue;
 }
 .btn-delete-img-white
 {

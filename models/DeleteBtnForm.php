@@ -21,12 +21,21 @@ class DeleteBtnForm extends Model
     {
         $valId=$this->delBtnHidden;
         
+        /*
         if(!isset($valId))
-            file_put_contents('Error','test.txt');
+            file_put_contents('test.txt','Error');
         else
-            file_put_contents($valId,'test.txt');
+            file_put_contents('test.txt',$valId);
+        */
+        $delData=TasksData::find()->where(['user_id'=>$valId])->one();
         //$delData=TasksData::findOne($valId);
-        //$delData->delete();
+        if(isset($delData))
+        {
+            $delData->delete();
+            return true;
+        }
+        else
+            return false;
     }     
 }
 

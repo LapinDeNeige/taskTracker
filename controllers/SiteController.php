@@ -210,12 +210,14 @@ class SiteController extends Controller
 
         if($delBtnForm->load(Yii::$app->request->post()))
         {
-            $delBtnForm->deleteData();
-            Yii::$app->session->setFlash('success','Data removed sucessfully.'); 
+            if($delBtnForm->deleteData())
+                Yii::$app->session->setFlash('success','Data removed sucessfully.'); 
+            else
+                Yii::$app->session->setFlash('error','Error removing data');
         }
         else
         {
-            Yii::$app->session->setFlash('error','Error removing data');
+            Yii::$app->session->setFlash('error','Error loading data');
         }
 
         return $this->goHome();
@@ -229,11 +231,11 @@ class SiteController extends Controller
         $editModel=new EditModel();
         if($editModel->load(Yii::$app->request->post()))
         {            
-            if(!$editModel->validate())
+            if(!$editModel->validateData())
                 Yii::$app->session->setFlash('error','Task not set');
             else
             {
-                $editModel->editData();
+                $editModel->editData(); //if
                 Yii::$app->session->setFlash('success','Changed sucessfully');
             }
         }
@@ -248,7 +250,9 @@ class SiteController extends Controller
     ///
     public function actionTmp()
 	{
-        
+        //
+        file_put_contents('tmp.txt','tmp started');
+        //
         if(Yii::$app->request->isAjax)
         {
             $taskId=Yii::$app->request->post('task_id'); //$_POST['data'];
@@ -258,12 +262,12 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error','Task id does not exist '.$data);    
             else
             {
-                
+                /*
                 $taskData=TasksData::findOne($taskId);
                 $taskData->taskStatus=$taskStatus;
                 
                 $taskData->save();
-                
+                */
 
                 Yii::$app->session->setFlash('success','Data successfull ');
             }
