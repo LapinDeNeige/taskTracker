@@ -91,7 +91,7 @@ class SiteController extends Controller
 		
 		$queryCount=$query->count();
 		$pages=new Pagination(['totalCount'=>$queryCount
-		,'defaultPageSize'=>2]); 
+		,'defaultPageSize'=>3]); 
 		$data=$query->offset($pages->offset)->limit($pages->limit)->all(); 
 
 

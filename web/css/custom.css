@@ -86,6 +86,7 @@ h1,.txt-bg
 	margin-left: -150px;
 	background-color:dodgerblue;
 }
+
 .btn-delete-img-white
 {
 	background-image:url('../img/remove-white.svg');
@@ -112,7 +113,11 @@ h1,.txt-bg
 	border:none;	
 	border-radius: 5px;
 }
-
+.btns
+{
+	display: flex;
+	flex-direction: column;
+}
 
 .signin-btn
 {

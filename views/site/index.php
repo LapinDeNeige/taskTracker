@@ -211,7 +211,7 @@
 						echo '</td>';
 						//echo Html::tag('td',$d['taskStatus'],['name'=>'on_id','class'=>'td-task-status']); //drop down list
 						
-						echo '<div>';
+						echo '<div class="btns">';
 							echo '<td>';
 								echo Html::tag('button','',['class'=>'btn-d-e btn-delete btn-delete-img-white','onclick'=>'openDeleteTaskModal('.$curTaskNumber.')']);
 							echo '</td>';
