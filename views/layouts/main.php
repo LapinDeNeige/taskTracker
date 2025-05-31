@@ -92,7 +92,11 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
 		if(Yii::$app->user->isGuest)
 		{
 		    echo Html::tag('button','Login',['onclick'=>'openLoginModal()','class'=>'btn-nav fonts-size-nav btn-dialog login-btn']);
-            echo Html::tag('button','Sign in',['onclick'=>'','class'=>'btn-nav fonts-size-nav btn-dialog signin-btn']);
+            echo Html::tag('button','Sign in',['onclick'=>'','class'=>'btn-nav fonts-size-nav btn-dialog signin-btn','onclick'=>'openSignupModal()']);
+
+            ///
+            //echo Html::tag('button','Sign in new user',['class'=>'btn-nav fonts-size-nav btn-dialog signin-btn-admin','onclick'=>'openSignupModal()']);
+            ///
 		}
         
 		else

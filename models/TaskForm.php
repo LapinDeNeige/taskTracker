@@ -4,7 +4,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\db\Connection;
-
+use yii\base\ErrorException;
 
 class TaskForm extends Model
 {
@@ -29,21 +29,25 @@ class TaskForm extends Model
 
 	public  function addData($userId)
 	{
-		$tasksData=new TasksData();
-		$tasksData->Task=$this->task;
-		
-		$lastTaskId=TasksData::getLastTaskNumber($userId);
 
-		$tasksData->taskNumber = ($lastTaskId+1); 
-
-		$tasksData->Task_start_date=$this->taskStart;
-		$tasksData->Task_end_date=$this->taskEnd;
+		try
+		{
+			$tasksData=new TasksData();
+			$tasksData->Task=$this->task;
 			
-		$tasksData->taskInfo=$this->taskInformation;
+			$tasksData->Task_start_date=$this->taskStart;
+			$tasksData->Task_end_date=$this->taskEnd;
+				
+			$tasksData->taskInfo=$this->taskInformation;
 
-		$tasksData->user_id=$userId;
-		
-		$tasksData->save();
+			//$tasksData->user_id=$userId;
+			
+			$tasksData->save();
+		}
+		catch(ErrorException $err)
+		{
+			throw $err;
+		}
 
 	}
 }

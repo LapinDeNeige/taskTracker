@@ -1,5 +1,3 @@
-
-
 <?php
 	use yii\bootstrap\Button;
 	use yii\bootstrap5\Html;
@@ -45,7 +43,7 @@
 			disableElement(bodyElement);
 			 $.ajax(
 			{
-				url:'<?php echo Url::toRoute("tmp")?>',
+				url:'<?php echo Url::toRoute("update")?>',
 				type:'post',
 				dataType:'json',
 				data:{'task_id':taskId,
@@ -58,7 +56,7 @@
 				{
 					enableElement(bodyElement);
 					console.log("Error updating data!"+code);
-					//alert("Error updating data!"+code);
+					
 				}
 				
 			}
@@ -213,14 +211,16 @@
 						echo '</td>';
 						//echo Html::tag('td',$d['taskStatus'],['name'=>'on_id','class'=>'td-task-status']); //drop down list
 						
-						echo '<td>';
-							echo Html::tag('button','',['class'=>'btn-d-e btn-delete btn-delete-img-white','onclick'=>'openDeleteTaskModal('.$curTaskNumber.')']);
-						echo '</td>';
+						echo '<div>';
+							echo '<td>';
+								echo Html::tag('button','',['class'=>'btn-d-e btn-delete btn-delete-img-white','onclick'=>'openDeleteTaskModal('.$curTaskNumber.')']);
+							echo '</td>';
 						
-						echo '<td>';
-							//echo '<input type="button" class="btn-d-e btn-edit"/>';
-							echo Html::tag('button','',['class'=>'btn-d-e btn-edit btn-edit-img-white','onclick'=>'openEditModal('.$curTaskNumber.')']);
-						echo'</td>';
+							echo '<td>';
+								//echo '<input type="button" class="btn-d-e btn-edit"/>';
+								echo Html::tag('button','',['class'=>'btn-d-e btn-edit btn-edit-img-white','onclick'=>'openEditModal('.$curTaskNumber.')']);
+							echo'</td>';
+						echo '</div>';
 					echo '</tr>';
 					
 				}

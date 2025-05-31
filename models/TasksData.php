@@ -2,6 +2,7 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 
+use yii\base\ErrorException;
 class TasksData extends ActiveRecord
 {
 	public static function tableName()
@@ -16,13 +17,6 @@ class TasksData extends ActiveRecord
 		];
 	}
 	
-	public static function getLastTaskNumber($userId) //get last task number of user id 
-	{
-		$result= static::find()->where(['user_id'=>$userId])->one();
-		if(!isset($result))
-			return 0;
-		return $result->taskNumber;
-	}
 }
 
 ?>

@@ -23,6 +23,7 @@ use app\models\DeleteBtnForm;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
+use yii\base\ErrorException;
 class SiteController extends Controller
 {
     /**
@@ -89,13 +90,10 @@ class SiteController extends Controller
 		$query=TasksData::find()->where([]);//['user_id'=>$userId]
 		
 		$queryCount=$query->count();
-		
 		$pages=new Pagination(['totalCount'=>$queryCount
-		,'defaultPageSize'=>1]); 
-		
-       
+		,'defaultPageSize'=>2]); 
+		$data=$query->offset($pages->offset)->limit($pages->limit)->all(); 
 
-		$data=$query->offset($pages->offset)->limit(3)->all(); 
 
 		/**For main.php layout */
         $this->view->params['loginModel']=new LoginForm(); 
@@ -186,10 +184,16 @@ class SiteController extends Controller
 		
 		if($addForm->load(Yii::$app->request->post()))
 		{
-            $userId=Yii::$app->user->identity->id;
-            $addForm->addData($userId); 
-
-            Yii::$app->session->setFlash('success','Data loaded');
+            try
+            {
+                $userId=Yii::$app->user->identity->id;
+                $addForm->addData($userId);
+                Yii::$app->session->setFlash('success','Task added successfully');
+            }
+            catch(ErrorException $err)
+            {
+                Yii::$app->session->setFlash('error',$err);
+            }
 		}
 		else
 			Yii::$app->session->setFlash('error','Data not loaded');
@@ -210,10 +214,15 @@ class SiteController extends Controller
 
         if($delBtnForm->load(Yii::$app->request->post()))
         {
-            if($delBtnForm->deleteData())
+            try
+            {
+                $delBtnForm->deleteData();
                 Yii::$app->session->setFlash('success','Data removed sucessfully.'); 
-            else
-                Yii::$app->session->setFlash('error','Error removing data');
+            }
+            catch(ErrorException)
+            {
+                  Yii::$app->session->setFlash('error','Error removing data');
+            }
         }
         else
         {
@@ -235,8 +244,15 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error','Task not set');
             else
             {
-                $editModel->editData(); //if
-                Yii::$app->session->setFlash('success','Changed sucessfully');
+                try
+                {
+                    $editModel->editData(); 
+                    Yii::$app->session->setFlash('success','Data edited successfully');
+                }
+                catch(ErrorException $err)
+                {
+                    Yii::$app->session->setFlash('error',$err);
+                }
             }
         }
         else
@@ -248,10 +264,10 @@ class SiteController extends Controller
     }
 
     ///
-    public function actionTmp()
+    public function actionUpdate()
 	{
         //
-        file_put_contents('tmp.txt','tmp started');
+        //file_put_contents('tmp.txt','tmp started');
         //
         if(Yii::$app->request->isAjax)
         {
@@ -262,13 +278,10 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error','Task id does not exist '.$data);    
             else
             {
-                /*
                 $taskData=TasksData::findOne($taskId);
                 $taskData->taskStatus=$taskStatus;
-                
                 $taskData->save();
-                */
-
+                
                 Yii::$app->session->setFlash('success','Data successfull ');
             }
         }

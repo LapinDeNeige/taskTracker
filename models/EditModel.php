@@ -3,6 +3,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\base\ErrorException;
 
 class EditModel extends Model
 {
@@ -31,20 +32,7 @@ class EditModel extends Model
 		['taskNumber','integer']
 	];
 	
-	/*	
-	return [
-		['task','required','when'=>function($model)
-		{
-			return (empty($model->taskInformation)&& empty($model->taskStart));
-		}]
-		*/
-		/*
-		['taskStart','required','when'=>function($model)
-		{
-			return (empty($model->task) && empty($model->taskInformation) && empty($model->taskEnd));
-		}	
-	],
-	*/
+	
         
     }
 	public function validateData()
@@ -57,23 +45,35 @@ class EditModel extends Model
 
 	public function editData()
 	{
-		$valEditId=$this->taskNumber;
-        $dataEdit=TasksData::find($valEditId)->one();
+		try
+		{
+			$valEditId=$this->taskNumber;
+			$dataEdit=TasksData::find()->where(['taskNumber'=>$valEditId])->one();
+			
 
-		///
-		//$cnt=$dataEdit->count();
-		//file_put_contents('test.txt',$valEditId);
-		///
+			if(!empty($this->task))
+				$dataEdit->Task=$this->task;
+			else
+				throw new ErrorException('some field not set');
+			if(!empty($this->taskStart))
+				$dataEdit->Task_start_date=$this->taskStart;
+			else
+				throw new ErrorException('some field not set');
+			if(!empty($this->taskEnd))
+				$dataEdit->Task_end_date=$this->taskEnd;
+			else
+				throw new ErrorException('some field not set');
+			if(!empty($this->taskInformation))
+				$dataEdit->taskInfo=$this->taskInformation;
+			else
+				throw new ErrorException('some field not set');
+			$dataEdit->save();
 		
-		if(!empty($this->task))
-			$dataEdit->Task=$this->task;
-		if(!empty($this->taskStart))
-			$dataEdit->Task_start_date=$this->taskStart;
-		if(!empty($this->taskEnd))
-			$dataEdit->Task_end_date=$this->taskEnd;
-		if(!empty($this->taskInformation))
-			$dataEdit->taskInfo=$this->taskInformation;
-		$dataEdit->save();
+		}
+		catch(ErrorException $e)
+		{
+			throw $e;
+		}
 	}
     
 }

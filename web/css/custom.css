@@ -184,8 +184,8 @@ ul
 	font-size:22px;
 	color:white;
 	display:flex;
-	position: absolute;
-	bottom:55px;
+	position: relative;
+	top:550px;
 }
 .no-data-text
 {
