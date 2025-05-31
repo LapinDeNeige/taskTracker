@@ -1,10 +1,8 @@
 Task tracker for everyday's usage
 ===========================================================================
-Abilities
-1. Save task in database
-2. Edit task
-3. Remove data
-4. Create new user
-5. Log in
+Task tracker helps you in business to track your issues in your projects
+Improve your productivity and time management skills and achieve more in less time
+Access your tasks wherever you are
+Fully free! Discover new expierence!
 ===========================================================================
 Development is to be continued
