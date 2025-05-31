@@ -148,6 +148,7 @@ a.desc:after {
 	min-height:100px;
 	overflow:auto;
 	position:absolute;
+<<<<<<< HEAD
 
 	margin-left:0%;
 	top:9%;
@@ -155,6 +156,14 @@ a.desc:after {
 	display:table-row;
 	width:100%;
 	height:80%;
+=======
+	left:3%;
+	top:7%;
+	bottom:130px;
+	display:table-row;
+	width:100%;
+	height:90%;
+>>>>>>> 70e92612c503cb261cae6d6b7c47c738226e2771
 }
 
 tr

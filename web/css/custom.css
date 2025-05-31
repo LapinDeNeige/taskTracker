@@ -86,7 +86,15 @@ h1,.txt-bg
 	margin-left: -150px;
 	background-color:dodgerblue;
 }
+<<<<<<< HEAD
 
+=======
+.btns
+{
+	display: flex;
+	flex-direction: row;
+}
+>>>>>>> 70e92612c503cb261cae6d6b7c47c738226e2771
 .btn-delete-img-white
 {
 	background-image:url('../img/remove-white.svg');
@@ -189,8 +197,7 @@ ul
 	font-size:22px;
 	color:white;
 	display:flex;
-	position: relative;
-	top:550px;
+	margin-top:600px;
 }
 .no-data-text
 {
