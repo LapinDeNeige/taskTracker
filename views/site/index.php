@@ -94,8 +94,8 @@
 		$btnEditTask=ActiveForm::begin(['method'=>'POST','action'=>Url::toRoute(['edit'])]);
 
 			echo $btnEditTask->field($editModel,'task')->textInput(['maxlength'=>'50','id'=>'edit-task']);
-			echo $btnEditTask->field($editModel,'taskStart')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control']]);
-			echo $btnEditTask->field($editModel,'taskEnd')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'mm-dd-yyyy','inline'=>false,'options'=>['class'=>'form-control']]);
+			echo $btnEditTask->field($editModel,'taskStart')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'yyyy-MM-dd','inline'=>false,'options'=>['class'=>'form-control']]);
+			echo $btnEditTask->field($editModel,'taskEnd')->widget(\yii\jui\DatePicker::classname(),['dateFormat'=>'yyyy-MM-dd','inline'=>false,'options'=>['class'=>'form-control']]);
 			echo $btnEditTask->field($editModel,'taskInformation')->textarea(['maxlength'=>'150','style'=>'height:150px;','id'=>'edit-task-info']);
 			
 			echo $btnEditTask->field($editModel,'taskNumber')->hiddenInput(['value'=>'','id'=>'hidden-edit'])->label(false);

@@ -263,12 +263,8 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    ///
     public function actionUpdate()
 	{
-        //
-        //file_put_contents('tmp.txt','tmp started');
-        //
         if(Yii::$app->request->isAjax)
         {
             $taskId=Yii::$app->request->post('task_id'); //$_POST['data'];
@@ -282,12 +278,12 @@ class SiteController extends Controller
                 $taskData->taskStatus=$taskStatus;
                 $taskData->save();
                 
-                Yii::$app->session->setFlash('success','Data successfull ');
+                //Yii::$app->session->setFlash('success','Data successfull ');
             }
         }
 		return  $this->goHome();
 		
 	}
-    ///
+    
 }
 

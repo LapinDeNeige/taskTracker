@@ -27,6 +27,10 @@ class TaskForm extends Model
 		];
 	}
 
+	private function getCurrentDate()
+	{
+		return date('l jS \of F Y h:i:s A');
+	}
 	public  function addData($userId)
 	{
 
@@ -34,11 +38,19 @@ class TaskForm extends Model
 		{
 			$tasksData=new TasksData();
 			$tasksData->Task=$this->task;
-			
-			$tasksData->Task_start_date=$this->taskStart;
-			$tasksData->Task_end_date=$this->taskEnd;
+
+			$taskStart=date(strtotime($this->taskStart));
+			$taskEnd=date(strtotime($this->taskEnd));
+			//
+			//file_put_contents('tmp.txt',$taskStart);
+			//
+
+			$tasksData->Task_start_date=$taskStart;
+			$tasksData->Task_end_date=$taskEnd;
 				
 			$tasksData->taskInfo=$this->taskInformation;
+
+			/*$taskData->Date=$this->getCurrentDate();*/
 
 			//$tasksData->user_id=$userId;
 			
