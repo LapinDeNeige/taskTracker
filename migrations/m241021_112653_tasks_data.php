@@ -38,6 +38,10 @@ class m241021_112653_create_user_data extends Migration
 		'Task_end_date'=>$this->date(),
 		'taskInfo'=>$this->string(90),
         'Date'=>$this->dateTime();
+<<<<<<< HEAD
+=======
+
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
         //
         'userId'=>$this->
         //

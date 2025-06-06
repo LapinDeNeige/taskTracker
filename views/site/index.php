@@ -188,8 +188,13 @@
 					$taskStatus=Html::encode($d['taskStatus']);
 
 
+<<<<<<< HEAD
 					echo '<tr data-key="[]" class="position-relative d-block w-95" id='. $curTaskNumber.'>';
 						echo Html::tag('td','#'.$curTaskNumber,['class'=>'td-task-number ']);
+=======
+					echo '<tr data-key="[]" id='. $curTaskNumber.'>';
+						echo Html::tag('td','#'.$curTaskNumber,['class'=>'td-task-number']);
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 						echo Html::tag('td',$curTask,['class'=>'td-task']);
 						echo Html::tag('td',$curTaskInfo,['class'=>'td-task-info']);
 						echo Html::tag('td',$curTaskStartDate,['class'=>'td-task-start']);
@@ -230,8 +235,12 @@
 			echo '</table>';
 			
 			echo LinkPager::widget([
+<<<<<<< HEAD
 				'pagination'=>$pages,
 				'options'=>['class'=>'d-flex pagination position-absolute']]); 
+=======
+				'pagination'=>$pages,]); 
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 			
 		}
 		

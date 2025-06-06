@@ -38,11 +38,19 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<<<<<<< HEAD
 <body class="body-bg-color w-100 h-100">
 <?php $this->beginBody() ?>
 
 
 <header id="header" class="d-flex flex-column w-100 overflow-hidden">
+=======
+<body class="d-flex flex-column h-100 body-bg-color">
+<?php $this->beginBody() ?>
+
+
+<header id="header">
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
     <?php
   
     ///
@@ -122,8 +130,13 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
     ?>
 </header>
 
+<<<<<<< HEAD
 <main id="main" class="flex-shrink-0 w-100 " role="main">
     <div class="container w-100 h-100">
+=======
+<main id="main" class="flex-shrink-0" role="main">
+    <div class="container">
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
         <?php if (!empty($this->params['breadcrumbs'])): ?>
             <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
         <?php endif ?>
@@ -132,7 +145,11 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/site.js');
     </div>
 </main>
 
+<<<<<<< HEAD
 <footer id="footer" class="mt-auto py-3 footer position-absolute">
+=======
+<footer id="footer" class="mt-auto py-3 footer">
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start txt-bg" > Task tracker digital </div>

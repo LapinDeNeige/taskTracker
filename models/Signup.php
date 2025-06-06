@@ -60,6 +60,10 @@ class Signup extends ActiveRecord implements IdentityInterface
 		{
 			if($this->isNewRecord)
 				$this->auth_key=Yii::$app->security->generateRandomString();
+<<<<<<< HEAD
+=======
+
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 			return true;
 		}
 		return false;

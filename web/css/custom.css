@@ -176,6 +176,10 @@ ul
 {
 	color:white;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 .active
 {
 	color:white;
@@ -193,9 +197,14 @@ ul
 {
 	font-size:22px;
 	color:white;
+<<<<<<< HEAD
 	margin-top:35%;
 	left:10px;
 	
+=======
+	display:flex;
+	margin-top:600px;
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 }
 .no-data-text
 {
@@ -264,7 +273,11 @@ ul
 	{
 		font-size: 50px;
 	}
+<<<<<<< HEAD
 	.logout-btn
+=======
+
+>>>>>>> da15e853c8464a63a94da72fa36432900a57eb83
 	{
 		display: none;
 
